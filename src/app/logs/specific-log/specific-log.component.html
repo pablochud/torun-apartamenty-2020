@@ -1,0 +1,35 @@
+<mat-card class="specific-log-card">
+  <mat-card-header>
+    <span [ngSwitch]="type">
+      <mat-icon *ngSwitchCase="'FATAL'" color="warn">highlight_off</mat-icon>
+      <mat-icon *ngSwitchCase="'ERROR'" color="warn">error</mat-icon>
+      <mat-icon *ngSwitchCase="'WARN'" color="accent">warning</mat-icon>
+      <mat-icon *ngSwitchCase="'INFO'" color="primary">info</mat-icon>
+      <mat-icon *ngSwitchCase="'DEBUG'" color="primary">bug_report</mat-icon>
+      <mat-icon *ngSwitchCase="'TRACE'" color="accent">settings_ethernet</mat-icon>
+      <mat-icon *ngSwitchDefault> {{type}} </mat-icon>
+    </span>
+    <mat-card-title> {{type}} </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngIf="showSpinner" class="centered-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+    <span *ngFor="let log of logs">
+      {{log}}
+      <span *ngIf="log.endsWith('work - start!')"><br><br><br></span>
+      <span *ngIf="!log.endsWith('work - start!')"><br></span>
+    </span>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="row">
+      <mat-form-field>
+        <input matInput type="number" min="0" placeholder="Początek" [(ngModel)]="startFromLine" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" min="1" placeholder="Ilość linii" [(ngModel)]="lines" required>
+      </mat-form-field>
+      <button mat-button color="primary" (click)="reloadLogs()">Wczytaj</button>
+    </div>
+  </mat-card-actions>
+</mat-card>

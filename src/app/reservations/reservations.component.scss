@@ -1,0 +1,42 @@
+@import "~src/app/common";
+
+.reservations-container {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding-bottom: 30px;
+
+  .header-row {
+    margin: auto;
+    width: 95%;
+  }
+
+  table {
+    margin: auto;
+    width: 95%;
+  }
+
+  .mat-form-field {
+    font-size: 18px;
+    width: 100%;
+  }
+
+  .mat-column-clientNote {
+    flex: 0 0 25% !important;
+    width: 25% !important;
+  }
+
+  .no-padding {
+    padding: 0;
+  }
+
+  .line-height {
+    line-height: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+}

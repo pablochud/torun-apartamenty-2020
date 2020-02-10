@@ -1,0 +1,53 @@
+<mat-tab-group #tabGroup mat-align-tabs="center" (selectedTabChange)="onTabChange($event)">
+  <mat-tab *ngIf="isDeveloper() || isOwner()" [label]="tabsLabels.ADMIN_PANEL" >
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">insert_chart_outlined</mat-icon>
+      {{tabsLabels.ADMIN_PANEL}}
+    </ng-template>
+    <div class="content">
+      <app-admin-panel></app-admin-panel>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="isDeveloper() || isOwner() || isUser()" [label]="tabsLabels.RESERVATIONS">
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">contact_mail</mat-icon>
+      {{tabsLabels.RESERVATIONS}}
+    </ng-template>
+    <div class="content">
+      <app-reservations></app-reservations>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="isDeveloper() || isOwner()" [label]="tabsLabels.APARTMENTS">
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">local_hotel</mat-icon>
+      {{tabsLabels.APARTMENTS}}
+    </ng-template>
+    <div class="content">
+      <app-apartments></app-apartments>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="isDeveloper() || isOwner()" [label]="tabsLabels.USERS">
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">group</mat-icon>
+      {{tabsLabels.USERS}}
+    </ng-template>
+    <div class="content">
+      <app-users></app-users>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="isDeveloper()" [label]="tabsLabels.LOGS">
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">format_align_center</mat-icon>
+      {{tabsLabels.LOGS}}
+    </ng-template>
+    <div class="content">
+      <app-logs></app-logs>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="isDeveloper() || isOwner() || isUser()" [label]="tabsLabels.LOGOUT">
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">close</mat-icon>
+      {{tabsLabels.LOGOUT}}
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

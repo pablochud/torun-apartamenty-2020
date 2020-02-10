@@ -1,0 +1,22 @@
+@import "~src/app/common";
+
+.specific-log-card {
+  max-width: 800px;
+  margin: 15px;
+  overflow: auto;
+  overflow-wrap: break-word;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.mat-form-field {
+  width: 15%;
+}
+
+.button {
+  width: 15%;
+}

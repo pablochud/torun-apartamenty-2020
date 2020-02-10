@@ -1,0 +1,8 @@
+<div class="logs-container">
+  <app-specific-log #errorLogs [logsService]="logsService" [type]="logsTypes.ERROR"></app-specific-log>
+  <app-specific-log #warnLogs [logsService]="logsService" [type]="logsTypes.WARN"></app-specific-log>
+  <app-specific-log #infoLogs [logsService]="logsService" [type]="logsTypes.INFO"></app-specific-log>
+  <app-specific-log #debugLogs [logsService]="logsService" [type]="logsTypes.DEBUG"></app-specific-log>
+  <app-specific-log #fatalLogs [logsService]="logsService" [type]="logsTypes.FATAL"></app-specific-log>
+  <app-specific-log #traceLogs [logsService]="logsService" [type]="logsTypes.TRACE"></app-specific-log>
+</div>

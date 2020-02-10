@@ -1,0 +1,149 @@
+<div class="apartments-container">
+  <div *ngIf="showSpinner" class="centered-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <mat-accordion class="example-headers-align" *ngFor="let apartment of apartments; let i = index">
+    <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{apartment.id}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{apartment.name}}
+          <mat-icon>local_hotel</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="half">
+          <p class="mat-form-row-label">Apartament: </p>
+          <div>
+            <mat-form-field>
+              <input matInput type="number" min="1" placeholder="Id" [(ngModel)]="apartment.id" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Nazwa" [(ngModel)]="apartment.name" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="half">
+          <p class="mat-form-row-label">Zamek: </p>
+          <div *ngIf="apartment.lock !== undefined">
+            <mat-form-field>
+              <input matInput placeholder="Id" [(ngModel)]="apartment.lock.id" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Nazwa" [(ngModel)]="apartment.lock.name" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="Serwis" [(ngModel)]="apartment.lock.lockService" required
+                          [compareWith]="compareService">
+                <mat-option *ngFor="let service of services" [value]="service.id">{{ service.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="apartment.notes !== undefined" class="row">
+        <div class="half">
+          <p class="mat-form-row-label">Notatka po polsku: </p>
+          <div class="mat-form-row" *ngIf="apartment.notes.polNote !== undefined">
+            <mat-form-field class="mat-form-field-long">
+              <textarea matInput placeholder="Treść" [(ngModel)]="apartment.notes.polNote.content"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="half">
+          <p class="mat-form-row-label">Notatka po angielsku: </p>
+          <div class="mat-form-row" *ngIf="apartment.notes.engNote !== undefined">
+            <mat-form-field class="mat-form-field-long">
+              <textarea matInput placeholder="Treść" [(ngModel)]="apartment.notes.engNote.content"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <mat-action-row>
+        <button mat-button color="accent" (click)="updateApartment(i, apartment.id)">Zapisz edycję</button>
+        <button mat-button color="primary" (click)="nextApartment()">Następny</button>
+        <button mat-button color="warn" (click)="deleteApartment(apartment.id)">Usuń</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion class="example-headers-align" *ngIf="newApartment !== undefined && !showSpinner">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Id
+        </mat-panel-title>
+        <mat-panel-description>
+          Dodaj nowy apartament
+          <mat-icon>add</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="half">
+          <p class="mat-form-row-label">Apartament: </p>
+          <div>
+            <mat-form-field>
+              <input matInput type="number" min="1" placeholder="Id" [(ngModel)]="newApartment.id" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Nazwa" [(ngModel)]="newApartment.name" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="half">
+          <p class="mat-form-row-label">Zamek: </p>
+          <div *ngIf="newApartment.lock !== undefined">
+            <mat-form-field>
+              <input matInput placeholder="Id" [(ngModel)]="newApartment.lock.id" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Nazwa" [(ngModel)]="newApartment.lock.name" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="Serwis" [(ngModel)]="newApartment.lock.lockService" required
+                          [compareWith]="compareService">
+                <mat-option *ngFor="let service of services" [value]="service.id">{{ service.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="newApartment.notes !== undefined" class="row">
+        <div class="half">
+          <p class="mat-form-row-label">Notatka po polsku: </p>
+          <div class="mat-form-row" *ngIf="newApartment.notes.polNote !== undefined">
+            <mat-form-field class="mat-form-field-long">
+              <textarea matInput placeholder="Treść" [(ngModel)]="newApartment.notes.polNote.content"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="half">
+          <p class="mat-form-row-label">Notatka po angielsku: </p>
+          <div class="mat-form-row" *ngIf="newApartment.notes.engNote !== undefined">
+            <mat-form-field class="mat-form-field-long">
+              <textarea matInput placeholder="Treść" [(ngModel)]="newApartment.notes.engNote.content"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="createApartment()">Dodaj</button>
+        <button mat-button color="warn" (click)="clearNewApartment()">Wyczyść</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

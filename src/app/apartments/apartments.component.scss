@@ -1,0 +1,45 @@
+@import "~src/app/common";
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.apartments-container {
+  margin: 1% auto;
+  width: 95%;
+}
+
+.mat-expansion-panel {
+  margin: 10px 0;
+}
+
+.mat-form-row {
+  display: flex;
+  height: 20%;
+}
+
+.mat-form-field {
+  margin-right: 1%;
+  width: 99%;
+}
+
+.mat-form-row-label {
+  line-height: 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+}
+
+.half {
+  width: 50%;
+}

@@ -1,0 +1,61 @@
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  margin: 5% auto auto;
+  max-width: 1024px;
+  height: 684px;
+  max-height: 684px;
+  background-image: url("../../images/login-bg.jpg");
+  background-size: cover;
+  text-align: center;
+  box-shadow: 0 0 158px 0 rgba(0, 0, 0, 0.55);
+}
+
+.card-wrap {
+  width: 60%;
+  height: 50%;
+  margin: auto;
+  padding-top: 5%;
+}
+
+mat-card {
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+mat-card-header {
+  justify-content: center;
+}
+
+mat-card-title {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+input {
+  font-size: x-large;
+}
+
+button {
+  font-size: larger;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.login-title {
+  font-size: 4rem;
+  color: #3f51b5 !important;
+  text-shadow: 1px 1px 10px black;
+}

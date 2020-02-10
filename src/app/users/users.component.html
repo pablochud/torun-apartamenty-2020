@@ -1,0 +1,93 @@
+<div class="users-container">
+  <div *ngIf="showSpinner" class="centered-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <mat-accordion class="example-headers-align" *ngFor="let user of users; let i = index">
+    <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span [ngSwitch]="user.role">
+            <span *ngSwitchCase="'DEVELOPER'">Developer</span>
+            <span *ngSwitchCase="'OWNER'">Owner</span>
+            <span *ngSwitchCase="'USER'">User</span>
+          </span>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{user.username}}
+          <mat-icon>person</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input matInput placeholder="Nazwa użytkownika" [(ngModel)]="user.username" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Hasło" [(ngModel)]="user.password" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Rola" [(ngModel)]="user.role" required
+                    [compareWith]="compareRole">
+          <mat-option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="date-picker">
+        <input matInput [matDatepicker]="picker" [(ngModel)]="user.expireTime"
+               placeholder="Data wygaśnięcia">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-action-row>
+        <button mat-button color="accent" (click)="updateUser(i, user.username)">Zapisz edycję</button>
+        <button mat-button color="primary" (click)="nextUser()">Następny</button>
+        <button mat-button color="warn" (click)="deleteUser(user.username)">Usuń</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion class="example-headers-align" *ngIf="newUser !== undefined && !showSpinner">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Rola
+        </mat-panel-title>
+        <mat-panel-description>
+          Dodaj nowego użytkownika
+          <mat-icon>add</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <mat-form-field>
+          <input matInput placeholder="Nazwa użytkownika" [(ngModel)]="newUser.username" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Hasło" [(ngModel)]="newUser.password" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Rola" [(ngModel)]="newUser.role" required
+                      [compareWith]="compareRole">
+            <mat-option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="date-picker">
+          <input matInput [matDatepicker]="picker" [(ngModel)]="newUser.expireTime"
+                 placeholder="Data wygaśnięcia">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="createUser()">Dodaj</button>
+        <button mat-button color="warn" (click)="clearNewUser()">Wyczyść</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
