@@ -2,7 +2,7 @@ import {LogsType} from './logs/logs-type.enum';
 
 export class ServerUrlsService {
 
-  private static prefix = 'https://torun-apartamenty-server.herokuapp.com/api/';
+  private static prefix = 'https://staging-apartaments-2020.herokuapp.com/api/';
 
   public static getApartmentsUrl(): string {
     return ServerUrlsService.prefix + 'apartments';
