@@ -33,6 +33,12 @@
         </mat-select>
       </mat-form-field>
 
+      <mat-form-field *ngIf="user.role !== 'OWNER'">
+        <mat-select placeholder="Przydzielony apartament" [(ngModel)]="user.apartments" multiple>
+          <mat-option *ngFor="let apartment of apartments" [value]="apartment.id">{{ apartment.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <mat-form-field class="date-picker">
         <input matInput [matDatepicker]="picker" [(ngModel)]="user.expireTime"
                placeholder="Data wygaśnięcia">
@@ -73,6 +79,12 @@
           <mat-select placeholder="Rola" [(ngModel)]="newUser.role" required
                       [compareWith]="compareRole">
             <mat-option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Przydzielony apartament" [(ngModel)]="newUser.apartments" multiple>
+            <mat-option *ngFor="let apartment of apartments" [value]="apartment.id">{{ apartment.name }}</mat-option>
           </mat-select>
         </mat-form-field>
 

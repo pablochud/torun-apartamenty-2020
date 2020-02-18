@@ -4,7 +4,7 @@ import {ROLE} from './models/Role';
 import {UsersService} from './users.service';
 import {MatSnackBar} from '@angular/material';
 import {HttpErrorResponse} from '@angular/common/http';
-import {Apartment} from '../apartments/models/apartment';
+import { ApartmentsService } from './../apartments/apartments.service';
 
 @Component({
   selector: 'app-users',
@@ -16,6 +16,7 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
   originalUsers: User[] = [];
   newUser: User = new User();
+  apartments = [];
   roles = [{id: ROLE.DEVELOPER.valueOf(), name: 'Developer'},
     {id: ROLE.OWNER.valueOf(), name: 'Owner'},
     {id: ROLE.USER.valueOf(), name: 'User'}];
@@ -23,7 +24,10 @@ export class UsersComponent implements OnInit {
   wasInit = false;
   showSpinner = true;
 
-  constructor(private usersService: UsersService, private snackBar: MatSnackBar) {
+  constructor(
+    private usersService: UsersService,
+    private snackBar: MatSnackBar,
+    private apartmentsService: ApartmentsService) {
   }
 
   ngOnInit() {
@@ -31,6 +35,7 @@ export class UsersComponent implements OnInit {
 
   init() {
     this.loadUsers();
+    this.loadApartmens();
   }
 
   private loadUsers() {
@@ -48,6 +53,12 @@ export class UsersComponent implements OnInit {
         this.showSpinner = false;
       });
     this.wasInit = true;
+  }
+
+  private loadApartmens(): void {
+    this.apartmentsService.getApartments().subscribe(apartments => {
+      this.apartments = apartments;
+    });
   }
 
   private copyUsers(reservations: User[]): User[] {

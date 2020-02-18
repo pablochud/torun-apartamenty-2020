@@ -25,7 +25,7 @@ export class AdminPanelComponent implements OnInit {
   noteStatuses = NoteStatus;
   passcodeStatuses = PasscodeStatus;
   wasInit = false;
-  showSpinner = false;
+  showSpinner = true;
 
   constructor(private adminPanelService: AdminPanelService, private snackBar: MatSnackBar) {
   }
@@ -35,7 +35,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   init() {
-    this.showSpinner = true;
+    // this.showSpinner = true;
     this.dataSource.sort = this.sort;
     this.adminPanelService.getReservations(this.getMonth(this.selectedDate.getMonth()), this.selectedDate.getFullYear())
       .subscribe(reservations => {

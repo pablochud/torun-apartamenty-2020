@@ -21,7 +21,7 @@ export class ReservationsComponent implements OnInit {
   noteStatuses = NoteStatus;
   passcodeStatuses = PasscodeStatus;
   wasInit = false;
-  showSpinner = false;
+  showSpinner = true;
 
   constructor(private reservationsService: ReservationsService, private snackBar: MatSnackBar) {
   }
@@ -31,7 +31,7 @@ export class ReservationsComponent implements OnInit {
   }
 
   init(): void {
-    this.showSpinner = true;
+    // this.showSpinner = true;
     this.reservationsService.getTruncatedReservations()
       .subscribe(reservations => {
         this.reservations = reservations;

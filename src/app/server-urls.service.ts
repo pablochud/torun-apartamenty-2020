@@ -2,6 +2,8 @@ import {LogsType} from './logs/logs-type.enum';
 
 export class ServerUrlsService {
 
+  // private static prefix = 'http://127.0.0.1:8080/api/';
+
   private static prefix = 'https://staging-apartaments-2020.herokuapp.com/api/';
 
   public static getApartmentsUrl(): string {
@@ -58,5 +60,9 @@ export class ServerUrlsService {
 
   static pingUrl() {
     return ServerUrlsService.prefix + 'ping';
+  }
+
+  static getIdoSellList() {
+    return ServerUrlsService.prefix + 'idosell';
   }
 }

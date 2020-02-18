@@ -9,6 +9,7 @@ import {ApartmentsComponent} from '../apartments/apartments.component';
 import {UsersComponent} from '../users/users.component';
 import {LogsComponent} from '../logs/logs.component';
 import {TabsLabels} from './TabsLabels';
+import { MainService } from './main.service';
 
 @Component({
   selector: 'app-main',
@@ -25,14 +26,25 @@ export class MainComponent implements OnInit, AfterViewInit {
   @ViewChild(LogsComponent) private logsComponent: LogsComponent;
 
   tabsLabels = TabsLabels;
+  idoSellList: { id: number, name: string };
+  selected: number;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private mainService: MainService) {
   }
 
   ngOnInit() {
     if (LoginService.isLoginIn() === false) {
       this.router.navigateByUrl('login');
     }
+    // this.mainService.getIdoSellList().subscribe(response => {
+    //   console.log(response);
+    //   this.idoSellList = response;
+    //   this.selected = response[0].id;
+    //   // TODO
+    //   // endpointBackend.setAuthorizationData(this.selected)
+    // });
   }
 
   ngAfterViewInit(): void {

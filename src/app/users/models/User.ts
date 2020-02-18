@@ -5,4 +5,5 @@ export class User {
   role: ROLE;
   expireTime: Date;
   password: string;
+  apartments: number[];
 }
