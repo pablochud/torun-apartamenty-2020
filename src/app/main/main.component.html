@@ -17,7 +17,16 @@
       <app-admin-panel></app-admin-panel>
     </div>
   </mat-tab>
-  <mat-tab *ngIf="isDeveloper() || isOwner() || isUser()" [label]="tabsLabels.RESERVATIONS">
+  <mat-tab [label]="tabsLabels.NEW" >
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">fiber_new</mat-icon>
+      {{tabsLabels.NEW}}
+    </ng-template>
+    <div class="content">
+      <app-new></app-new>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="isDeveloper() || isOwner() || isUser() || isSprzataczka()" [label]="tabsLabels.RESERVATIONS">
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">contact_mail</mat-icon>
       {{tabsLabels.RESERVATIONS}}
@@ -53,7 +62,7 @@
       <app-logs></app-logs>
     </div>
   </mat-tab>
-  <mat-tab *ngIf="isDeveloper() || isOwner() || isUser()" [label]="tabsLabels.LOGOUT">
+  <mat-tab *ngIf="isDeveloper() || isOwner() || isUser() || isSprzataczka()" [label]="tabsLabels.LOGOUT">
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">close</mat-icon>
       {{tabsLabels.LOGOUT}}

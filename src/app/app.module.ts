@@ -18,6 +18,7 @@ import {LogsComponent} from './logs/logs.component';
 import {SpecificLogComponent} from './logs/specific-log/specific-log.component';
 import {UsersComponent} from './users/users.component';
 import { AmountWithCommaPipe } from './amount-with-comma.pipe';
+import { NewComponent } from './new/new.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AmountWithCommaPipe } from './amount-with-comma.pipe';
     LogsComponent,
     SpecificLogComponent,
     UsersComponent,
-    AmountWithCommaPipe
+    AmountWithCommaPipe,
+    NewComponent
   ],
   imports: [
     BrowserModule,

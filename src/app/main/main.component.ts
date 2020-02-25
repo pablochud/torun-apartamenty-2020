@@ -6,6 +6,7 @@ import {ROLE} from '../users/models/Role';
 import {ReservationsComponent} from '../reservations/reservations.component';
 import {AdminPanelComponent} from '../admin-panel/admin-panel.component';
 import {ApartmentsComponent} from '../apartments/apartments.component';
+import {NewComponent} from '../new/new.component';
 import {UsersComponent} from '../users/users.component';
 import {LogsComponent} from '../logs/logs.component';
 import {TabsLabels} from './TabsLabels';
@@ -20,6 +21,7 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   @ViewChild('tabGroup') private tabGroup: MatTabGroup;
   @ViewChild(AdminPanelComponent) private adminPanelComponent: AdminPanelComponent;
+  @ViewChild(NewComponent) private newComponent: NewComponent;
   @ViewChild(ReservationsComponent) private reservationsComponent: ReservationsComponent;
   @ViewChild(ApartmentsComponent) private apartmentsComponent: ApartmentsComponent;
   @ViewChild(UsersComponent) private usersComponent: UsersComponent;
@@ -53,6 +55,8 @@ export class MainComponent implements OnInit, AfterViewInit {
       this.adminPanelComponent.init();
     } else if (textLabel === this.tabsLabels.RESERVATIONS && !this.reservationsComponent.wasInit) {
       this.reservationsComponent.init();
+    } else if (textLabel === this.tabsLabels.NEW && !this.newComponent.wasInit) {
+      this.newComponent.init();
     }
   }
 
@@ -64,6 +68,12 @@ export class MainComponent implements OnInit, AfterViewInit {
       case this.tabsLabels.ADMIN_PANEL: {
         if (!this.adminPanelComponent.wasInit) {
           this.adminPanelComponent.init();
+        }
+        break;
+      }
+      case this.tabsLabels.NEW: {
+        if (!this.newComponent.wasInit) {
+          this.newComponent.init();
         }
         break;
       }
@@ -109,5 +119,9 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   isDeveloper(): boolean {
     return LoginService.getRole() === ROLE.DEVELOPER;
+  }
+
+  isSprzataczka(): boolean {
+    return LoginService.getRole() === ROLE.SPRZATACZKA;
   }
 }

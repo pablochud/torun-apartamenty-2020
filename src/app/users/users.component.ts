@@ -17,9 +17,12 @@ export class UsersComponent implements OnInit {
   originalUsers: User[] = [];
   newUser: User = new User();
   apartments = [];
-  roles = [{id: ROLE.DEVELOPER.valueOf(), name: 'Developer'},
+  roles = [
+    {id: ROLE.DEVELOPER.valueOf(), name: 'Developer'},
     {id: ROLE.OWNER.valueOf(), name: 'Owner'},
-    {id: ROLE.USER.valueOf(), name: 'User'}];
+    {id: ROLE.USER.valueOf(), name: 'User'},
+    {id: ROLE.SPRZATACZKA.valueOf(), name: 'Sprzątaczka'}
+  ];
   step = -1;
   wasInit = false;
   showSpinner = true;

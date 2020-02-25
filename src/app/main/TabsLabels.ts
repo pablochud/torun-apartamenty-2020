@@ -4,5 +4,6 @@ export enum TabsLabels {
   APARTMENTS = 'Apartamenty',
   USERS = 'Użytkownicy',
   LOGS = 'Logi',
-  LOGOUT = 'Wyloguj'
+  LOGOUT = 'Wyloguj',
+  NEW = 'NOWE'
 }

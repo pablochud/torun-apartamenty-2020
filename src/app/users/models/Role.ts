@@ -1,5 +1,6 @@
 export enum ROLE {
   DEVELOPER = 'DEVELOPER',
   OWNER = 'OWNER',
-  USER = 'USER'
+  USER = 'USER',
+  SPRZATACZKA = 'SPRZATACZKA'
 }

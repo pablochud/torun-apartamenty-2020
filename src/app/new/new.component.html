@@ -1,0 +1,58 @@
+<div class="admin-panel-container">
+  <div class="header-row">
+    <mat-form-field class="date-picker">
+      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="reloadReservations()"
+             placeholder="Wybierz datę">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="filter">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="showSpinner" class="centered-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="table-container" [hidden]="reservations.length <= 0">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="endDate" matSortDirection="asc" matSortDisableClear>
+      <ng-container matColumnDef="reservationId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id rezerwacji</th>
+        <td mat-cell *matCellDef="let element"> {{element.reservationId}} </td>
+        <td mat-footer-cell *matFooterCellDef> Podsumowanie</td>
+      </ng-container>
+
+      <ng-container matColumnDef="startDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data przyjazdu</th>
+        <td mat-cell *matCellDef="let element"> {{element.startDate | dateFormat}}
+          <br> {{element.startDate | timeFormat}}
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="endDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data wyjazdu</th>
+        <td mat-cell *matCellDef="let element"> {{element.endDate | dateFormat}} <br> {{element.endDate | timeFormat}}
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="guestsNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Liczba gości</th>
+        <td mat-cell *matCellDef="let element" class="text-center"> {{element.guestsNumber}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{getTotalGuests()}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lockName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa zamka</th>
+        <td mat-cell *matCellDef="let element" class="text-center"> {{element.lockName}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+    </table>
+  </div>
+</div>
