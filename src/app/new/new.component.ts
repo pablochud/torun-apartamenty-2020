@@ -16,7 +16,7 @@ export class NewComponent implements OnInit {
 
   reservations: ReservationData[] = [];
   originalReservations: ReservationData[] = [];
-  displayedColumns: string[] = ['reservationId', 'startDate', 'endDate', 'guestsNumber', 'lockName'];
+  displayedColumns: string[] = ['reservationId', 'addDate', 'startDate', 'endDate', 'guestsNumber', 'lockName'];
   dataSource = new MatTableDataSource(this.reservations);
   @ViewChild(MatSort) sort: MatSort;
   lastDate = new Date();

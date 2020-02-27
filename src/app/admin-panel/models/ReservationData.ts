@@ -3,6 +3,7 @@ import {NoteStatus} from './NoteStatus';
 
 export class ReservationData {
   reservationId: number;
+  addDate: Date;
   startDate: Date;
   endDate: Date;
   apartmentId: number;
