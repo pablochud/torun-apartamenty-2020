@@ -34,7 +34,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field *ngIf="user.role !== 'OWNER'">
+      <mat-form-field>
         <mat-select placeholder="Przydzielony apartament" [(ngModel)]="user.apartments" multiple>
           <mat-option *ngFor="let apartment of apartments" [value]="apartment.id">{{ apartment.name }}</mat-option>
         </mat-select>
