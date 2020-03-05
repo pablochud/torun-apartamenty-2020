@@ -16,7 +16,7 @@
   </div>
 
   <div class="table-container" [hidden]="reservations.length <= 0">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="endDate" matSortDirection="asc" matSortDisableClear>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="addDate" matSortDirection="desc" matSortDisableClear>
       <ng-container matColumnDef="reservationId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Id rezerwacji</th>
         <td mat-cell *matCellDef="let element"> {{element.reservationId}} </td>
