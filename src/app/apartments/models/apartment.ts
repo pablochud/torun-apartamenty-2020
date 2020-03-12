@@ -3,6 +3,8 @@ import {NotesSet} from './notes-set';
 
 export class Apartment {
   id: number;
+  apartmentId: number;
+  idoSellKeyName: string;
   name: string;
   lock: Lock;
   notes: NotesSet;

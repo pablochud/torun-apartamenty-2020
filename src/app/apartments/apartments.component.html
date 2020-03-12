@@ -6,7 +6,7 @@
     <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{apartment.id}}
+          {{apartment.apartmentId}} {{getIdoSellName(apartment.idoSellKeyName)}}
         </mat-panel-title>
         <mat-panel-description>
           {{apartment.name}}
@@ -19,11 +19,17 @@
           <p class="mat-form-row-label">Apartament: </p>
           <div>
             <mat-form-field>
-              <input matInput type="number" min="1" placeholder="Id" [(ngModel)]="apartment.id" required>
+              <input matInput type="number" min="1" placeholder="Id" [(ngModel)]="apartment.apartmentId" required>
             </mat-form-field>
 
             <mat-form-field>
               <input matInput placeholder="Nazwa" [(ngModel)]="apartment.name" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="IdoSell" [(ngModel)]="apartment.idoSellKeyName" required>
+                <mat-option *ngFor="let idoSellKeyName of idoSellKeyNameList" [value]="idoSellKeyName.id">{{ idoSellKeyName.name }}</mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
         </div>
@@ -92,12 +98,19 @@
           <p class="mat-form-row-label">Apartament: </p>
           <div>
             <mat-form-field>
-              <input matInput type="number" min="1" placeholder="Id" [(ngModel)]="newApartment.id" required>
+              <input matInput type="number" min="1" placeholder="Id" [(ngModel)]="newApartment.apartmentId" required>
             </mat-form-field>
 
             <mat-form-field>
               <input matInput placeholder="Nazwa" [(ngModel)]="newApartment.name" required>
             </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="IdoSell" [(ngModel)]="newApartment.idoSellKeyName" required>
+                <mat-option *ngFor="let idoSellKeyName of idoSellKeyNameList" [value]="idoSellKeyName.id">{{ idoSellKeyName.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
           </div>
         </div>
         <div class="half">

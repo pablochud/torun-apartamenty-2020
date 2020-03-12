@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApartmentsService} from './apartments.service';
 import {Apartment} from './models/apartment';
 import {LockService} from './models/lock-service.enum';
+import {IdoSellKeyName} from './models/idoSellKeyName.enum';
 import {Lock} from './models/lock';
 import {NotesSet} from './models/notes-set';
 import {Note} from './models/note';
@@ -19,6 +20,11 @@ export class ApartmentsComponent implements OnInit {
   apartments: Apartment[] = [];
   originalApartments: Apartment[] = [];
   newApartment: Apartment = new Apartment(new Lock(), new NotesSet(new Note(NoteLanguage.ENG), new Note(NoteLanguage.POL)));
+  idoSellKeyNameList = [
+    {id: 'BRT', name: IdoSellKeyName.BRT},
+    {id: 'TMK', name: IdoSellKeyName.TMK},
+    {id: 'MSTR', name: IdoSellKeyName.MSTR}
+  ];
   services = [{id: LockService.TTLock.valueOf(), name: 'TTLock'}, {id: LockService.RemoteLock.valueOf(), name: 'RemoteLock'}];
   step = -1;
   wasInit = false;
@@ -64,6 +70,10 @@ export class ApartmentsComponent implements OnInit {
 
   compareService(o1: any, o2: any): boolean {
     return LockService[o1] === o2;
+  }
+
+  public getIdoSellName(name: string): string {
+    return IdoSellKeyName[name];
   }
 
   deleteApartment(id: number) {
