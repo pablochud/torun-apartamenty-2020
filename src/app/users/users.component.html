@@ -35,8 +35,13 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select placeholder="Przydzielony apartament" [(ngModel)]="user.apartments" multiple>
-          <mat-option *ngFor="let apartment of apartments" [value]="apartment.id">{{ apartment.name }}</mat-option>
+        <mat-select placeholder="Przydzielony apartament" [(ngModel)]="user.apartments" multiple
+                    [compareWith]="compareApartmentforUser">
+          <mat-optgroup *ngFor="let group of groupsApartment" [label]="group.name">
+            <ng-container *ngFor="let apartment of apartments">
+              <mat-option *ngIf="apartment.idoSellKeyName === group.id" [value]="apartment">{{ apartment.name }}</mat-option>
+            </ng-container>
+          </mat-optgroup>
         </mat-select>
       </mat-form-field>
 
@@ -85,7 +90,11 @@
 
         <mat-form-field>
           <mat-select placeholder="Przydzielony apartament" [(ngModel)]="newUser.apartments" multiple>
-            <mat-option *ngFor="let apartment of apartments" [value]="apartment.id">{{ apartment.name }}</mat-option>
+            <mat-optgroup *ngFor="let group of groupsApartment" [label]="group.name">
+              <ng-container *ngFor="let apartment of apartments">
+                <mat-option *ngIf="apartment.idoSellKeyName === group.id" [value]="apartment">{{ apartment.name }}</mat-option>
+              </ng-container>
+            </mat-optgroup>
           </mat-select>
         </mat-form-field>
 

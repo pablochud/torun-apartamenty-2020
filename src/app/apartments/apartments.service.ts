@@ -12,9 +12,9 @@ export class ApartmentsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getApartments(): Observable<Apartment[]> {
+  getApartments(): Observable<any> {
     const headers = new HttpHeaders({Authorization: LoginService.getAuthHeader()});
-    return this.httpClient.get<Apartment[]>(ServerUrlsService.getApartmentsUrl(), { headers });
+    return this.httpClient.get<any>(ServerUrlsService.getApartmentsUrl(), { headers });
   }
 
   deleteApartment(id: number): Observable<any> {

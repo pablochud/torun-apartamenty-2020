@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from './models/User';
+import {User, Apartments} from './models/User';
 import {ROLE} from './models/Role';
 import {UsersService} from './users.service';
 import {MatSnackBar} from '@angular/material';
 import {HttpErrorResponse} from '@angular/common/http';
 import { ApartmentsService } from './../apartments/apartments.service';
+import { IdoSellKeyName } from '../apartments/models/idoSellKeyName.enum';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-users',
@@ -16,12 +18,18 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
   originalUsers: User[] = [];
   newUser: User = new User();
-  apartments = [];
+  apartments: (Apartments & { name: string })[] = [];
   roles = [
     {id: ROLE.DEVELOPER.valueOf(), name: 'Developer'},
     {id: ROLE.OWNER.valueOf(), name: 'Owner'},
     {id: ROLE.USER.valueOf(), name: 'User'},
     {id: ROLE.SPRZATACZKA.valueOf(), name: 'Sprzątaczka'}
+  ];
+
+  groupsApartment = [
+    {id: 'BRT', name: IdoSellKeyName.BRT},
+    {id: 'TMK', name: IdoSellKeyName.TMK},
+    {id: 'MSTR', name: IdoSellKeyName.MSTR}
   ];
   step = -1;
   wasInit = false;
@@ -60,7 +68,13 @@ export class UsersComponent implements OnInit {
 
   private loadApartmens(): void {
     this.apartmentsService.getApartments().subscribe(apartments => {
-      this.apartments = apartments;
+      apartments.forEach(s => {
+        this.apartments.push({
+          apartmentId: s.apartmentId,
+          idoSellKeyName: s.idoSellKeyName,
+          name: s.name
+        });
+      });
     });
   }
 
@@ -80,6 +94,10 @@ export class UsersComponent implements OnInit {
 
   compareRole(o1: any, o2: any): boolean {
     return ROLE[o1] === o2;
+  }
+
+  compareApartmentforUser(o1: any, o2: any): boolean {
+    return o1.apartmentId === o2.apartmentId && o1.idoSellKeyName === o2.idoSellKeyName;
   }
 
   deleteUser(username: string) {

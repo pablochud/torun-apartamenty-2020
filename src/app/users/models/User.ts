@@ -5,5 +5,10 @@ export class User {
   role: ROLE;
   expireTime: Date;
   password: string;
-  apartments: number[];
+  apartments: Apartments[];
+}
+
+export class Apartments {
+  apartmentId: number;
+  idoSellKeyName: string;
 }
