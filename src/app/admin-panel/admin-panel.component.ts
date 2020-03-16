@@ -16,7 +16,7 @@ export class AdminPanelComponent implements OnInit {
 
   reservations: ReservationData[] = [];
   originalReservations: ReservationData[] = [];
-  displayedColumns: string[] = ['reservationId', 'startDate', 'endDate', 'daysNumber', 'guestsNumber', 'lockName',
+  displayedColumns: string[] = ['reservationId', 'reservationIdCustom', 'startDate', 'endDate', 'daysNumber', 'guestsNumber', 'lockName',
     'passcodeStatus', 'noteStatus', 'clientName', 'price', 'receipt', 'internalNote', 'note'];
   dataSource = new MatTableDataSource(this.reservations);
   @ViewChild(MatSort) sort: MatSort;
@@ -139,6 +139,7 @@ export class AdminPanelComponent implements OnInit {
       if (item.note !== this.originalReservations[index].note || item.receipt !== this.originalReservations[index].receipt) {
         this.adminPanelService.editAdditionalData(new AdditionalData(
           item.reservationId,
+          item.reservationIdCustom,
           item.apartmentId,
           item.receipt,
           item.note

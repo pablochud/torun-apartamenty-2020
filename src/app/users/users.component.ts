@@ -29,7 +29,7 @@ export class UsersComponent implements OnInit {
   groupsApartment = [
     {id: 'BRT', name: IdoSellKeyName.BRT},
     {id: 'TMK', name: IdoSellKeyName.TMK},
-    {id: 'MSTR', name: IdoSellKeyName.MSTR}
+    {id: 'PBL', name: IdoSellKeyName.PBL}
   ];
   step = -1;
   wasInit = false;

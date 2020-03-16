@@ -138,6 +138,7 @@ export class NewComponent implements OnInit {
       if (item.note !== this.originalReservations[index].note || item.receipt !== this.originalReservations[index].receipt) {
         this.adminPanelService.editAdditionalData(new AdditionalData(
           item.reservationId,
+          item.reservationIdCustom,
           item.apartmentId,
           item.receipt,
           item.note

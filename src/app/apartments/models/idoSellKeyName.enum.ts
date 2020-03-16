@@ -1,3 +1,3 @@
 export enum IdoSellKeyName {
-    BRT = 'Bartosz', TMK = 'Tomasz', MSTR = 'Master'
+    BRT = 'Bartosz', TMK = 'Tomasz', PBL = 'Pablo'
   }

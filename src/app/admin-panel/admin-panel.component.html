@@ -23,6 +23,12 @@
         <td mat-footer-cell *matFooterCellDef> Podsumowanie</td>
       </ng-container>
 
+      <ng-container matColumnDef="reservationIdCustom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Idosell klucz</th>
+        <td mat-cell *matCellDef="let element"> {{element.reservationIdCustom}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
       <ng-container matColumnDef="startDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Data przyjazdu</th>
         <td mat-cell *matCellDef="let element"> {{element.startDate | dateFormat}}
