@@ -23,7 +23,7 @@ export class ApartmentsComponent implements OnInit {
   idoSellKeyNameList = [
     {id: 'BRT', name: IdoSellKeyName.BRT},
     {id: 'TMK', name: IdoSellKeyName.TMK},
-    {id: 'PBL', name: IdoSellKeyName.PBL}
+    {id: 'RNT', name: IdoSellKeyName.RNT}
   ];
   services = [{id: LockService.TTLock.valueOf(), name: 'TTLock'}, {id: LockService.RemoteLock.valueOf(), name: 'RemoteLock'}];
   step = -1;
