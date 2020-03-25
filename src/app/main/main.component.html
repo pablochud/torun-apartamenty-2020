@@ -44,7 +44,7 @@
       <app-apartments></app-apartments>
     </div>
   </mat-tab>
-  <mat-tab *ngIf="isDeveloper() || isOwner()" [label]="tabsLabels.USERS">
+  <mat-tab *ngIf="isDeveloper()" [label]="tabsLabels.USERS">
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">group</mat-icon>
       {{tabsLabels.USERS}}
