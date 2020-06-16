@@ -9,8 +9,22 @@
           {{apartment.apartmentId}} {{getIdoSellName(apartment.idoSellKeyName)}}
         </mat-panel-title>
         <mat-panel-description>
-          {{apartment.name}}
-          <mat-icon>local_hotel</mat-icon>
+          <div>
+            {{apartment.name}}
+          </div>
+          <div>
+
+          <div class="icon-list" *ngIf="apartment | beenhere  | withLoading | async as obs">
+            <ng-template [ngIf]="!obs.loading">
+              <mat-icon [matTooltip]="obs.value?.serviceNotification ? 'Sprzątaczka była w apartamencie' : 'Sprzątaczka nie była w apartamencie'" [class.green]="obs.value?.serviceNotification" (click)="openRecordTableDialog($event, apartment)">beenhere</mat-icon>
+              <mat-icon [matTooltip]="obs.value?.guestNotification ? 'Gość się zakwaterował' : 'Gość się nie zakwaterował'" [class.black]="obs.value?.guestNotification" (click)="openRecordTableDialog($event, apartment)">local_hotel</mat-icon>
+            </ng-template>
+            <ng-template [ngIf]="obs.loading">
+              <div>Pobieranie...</div>
+            </ng-template>
+          </div> 
+
+          </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
@@ -71,6 +85,23 @@
             </mat-form-field>
           </div>
         </div>
+      </div>
+      <div class="half">
+        <p class="mat-form-row-label">Znaczniki obsługi apartamentu: <mat-icon class="mat-icon-small" matTooltip="Słowa kluczowe służące do przeszukiwania historii zamków">help</mat-icon></p>
+        <mat-form-field>
+          <mat-chip-list #chipList aria-label="Tags selection">
+            <mat-chip *ngFor="let tag of apartment.cleanersPasscodes"
+                    [removable]="removable" (removed)="remove(tag, apartments[i])">
+              {{tag}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Kod dostępu, bądź użytkownik sprzątaczki"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event, apartments[i])">
+          </mat-chip-list>
+        </mat-form-field>
       </div>
 
       <mat-action-row>
@@ -151,6 +182,24 @@
             </mat-form-field>
           </div>
         </div>
+      </div>
+
+      <div class="half">
+        <p class="mat-form-row-label">Znaczniki obsługi apartamentu: <mat-icon class="mat-icon-small" matTooltip="Słowa kluczowe służące do przeszukiwania historii zamków">help</mat-icon></p>
+        <mat-form-field>
+          <mat-chip-list #chipList aria-label="Tags selection">
+            <mat-chip *ngFor="let tag of newApartment.cleanersPasscodes"
+                    [removable]="removable" (removed)="remove(tag, newApartment)">
+              {{tag}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Kod dostępu, bądź użytkownik sprzątaczki"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event, newApartment)">
+          </mat-chip-list>
+        </mat-form-field>
       </div>
 
       <mat-action-row>

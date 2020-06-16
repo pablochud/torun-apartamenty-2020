@@ -19,6 +19,9 @@ import {SpecificLogComponent} from './logs/specific-log/specific-log.component';
 import {UsersComponent} from './users/users.component';
 import { AmountWithCommaPipe } from './amount-with-comma.pipe';
 import { NewComponent } from './new/new.component';
+import { BeenHere } from './apartments/pipes/been-here.pipe';
+import { WithLoadingPipe } from './apartments/pipes/with-loading.pipe';
+import {RecordTableDialogComponent} from './apartments/dialogs/record-table-dialog/record-table-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { NewComponent } from './new/new.component';
     SpecificLogComponent,
     UsersComponent,
     AmountWithCommaPipe,
-    NewComponent
+    NewComponent,
+    BeenHere,
+    WithLoadingPipe,
+    RecordTableDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +52,9 @@ import { NewComponent } from './new/new.component';
     HttpClientModule
   ],
   providers: [],
+  entryComponents: [
+    RecordTableDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -10,6 +10,10 @@ export class ServerUrlsService {
     return ServerUrlsService.prefix + 'apartments';
   }
 
+  public static getNotificationUrl(): string {
+    return ServerUrlsService.prefix + 'apartments/notification';
+  }
+
   static deleteApartmentUrl(id: number) {
     return ServerUrlsService.prefix + 'apartments/' + id;
   }
@@ -64,5 +68,9 @@ export class ServerUrlsService {
 
   static getIdoSellList() {
     return ServerUrlsService.prefix + 'idosell';
+  }
+
+  static getRecordListByLockUrl(lockId: number) {
+    return ServerUrlsService.prefix + 'records/' + lockId;
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {LoginService} from '../login/login.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Apartment} from './models/apartment';
+import {Notification} from './models/notification';
 import {ServerUrlsService} from '../server-urls.service';
 import {Observable} from 'rxjs';
 
@@ -10,7 +11,8 @@ import {Observable} from 'rxjs';
 })
 export class ApartmentsService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient) { }
 
   getApartments(): Observable<any> {
     const headers = new HttpHeaders({Authorization: LoginService.getAuthHeader()});
@@ -33,4 +35,11 @@ export class ApartmentsService {
     headers.append('Content-Type', 'application/json');
     return this.httpClient.post(ServerUrlsService.createApartmentUrl(), newApartment, { headers });
   }
+
+  getNotification(): Observable<Notification[]> {
+    const headers = new HttpHeaders({Authorization: LoginService.getAuthHeader()});
+    headers.append('Content-Type', 'application/json');
+    return this.httpClient.get<Notification[]>(ServerUrlsService.getNotificationUrl(), {headers});
+  }
+
 }

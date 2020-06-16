@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, NgZone} from '@angular/core';
 import {ApartmentsService} from './apartments.service';
 import {Apartment} from './models/apartment';
 import {LockService} from './models/lock-service.enum';
@@ -9,11 +9,16 @@ import {Note} from './models/note';
 import {NoteLanguage} from './models/note-language.enum';
 import {MatSnackBar} from '@angular/material';
 import {HttpErrorResponse} from '@angular/common/http';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {RecordTableDialogComponent} from './dialogs/record-table-dialog/record-table-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-apartments',
   templateUrl: './apartments.component.html',
-  styleUrls: ['./apartments.component.scss']
+  styleUrls: ['./apartments.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApartmentsComponent implements OnInit {
 
@@ -28,9 +33,17 @@ export class ApartmentsComponent implements OnInit {
   services = [{id: LockService.TTLock.valueOf(), name: 'TTLock'}, {id: LockService.RemoteLock.valueOf(), name: 'RemoteLock'}];
   step = -1;
   wasInit = false;
-  showSpinner = false;
+  showSpinner = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  removable = true;
+  addOnBlur = true;
 
-  constructor(private apartmentsService: ApartmentsService, private snackBar: MatSnackBar) {
+  constructor(
+    private apartmentsService: ApartmentsService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private cdr: ChangeDetectorRef
+    ) {
   }
 
   private static isUndefinedOrNull(val: any): boolean {
@@ -48,14 +61,15 @@ export class ApartmentsComponent implements OnInit {
     this.setStep(-1);
     this.apartments = [];
     this.originalApartments = [];
-    this.showSpinner = true;
     this.apartmentsService.getApartments()
       .subscribe(apartments => {
         this.saveApartments(apartments);
         this.showSpinner = false;
+        this.cdr.markForCheck();
       }, (error: HttpErrorResponse) => {
         this.openSnackBar('Nie udało się wczytać apartamentów!\n' + error.error.message);
         this.showSpinner = false;
+        this.cdr.markForCheck();
       });
     this.wasInit = true;
   }
@@ -144,4 +158,39 @@ export class ApartmentsComponent implements OnInit {
       verticalPosition: 'top'
     });
   }
+
+  add(event: MatChipInputEvent, apartment: Apartment): void {
+    const input = event.input;
+    const value = event.value;
+    if ((value || '').trim()) {
+      if (apartment.cleanersPasscodes === undefined) {
+        apartment.cleanersPasscodes = new Array();
+      }
+      apartment.cleanersPasscodes.push(value);
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(tags: string, apartment: Apartment): void {
+    const index = apartment.cleanersPasscodes.indexOf(tags);
+
+    if (index >= 0) {
+      apartment.cleanersPasscodes.splice(index, 1);
+    }
+  }
+
+  public openRecordTableDialog(event: Event, apartment: Apartment): void {
+    event.stopPropagation();
+    this.dialog.open(RecordTableDialogComponent, {
+      data: {
+        apartment
+      },
+      minWidth: '40vw'
+    });
+  }
+
 }

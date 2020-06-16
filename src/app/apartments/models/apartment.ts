@@ -8,6 +8,7 @@ export class Apartment {
   name: string;
   lock: Lock;
   notes: NotesSet;
+  cleanersPasscodes: string[];
 
   constructor(lock: Lock, notes: NotesSet) {
     this.lock = lock;
