@@ -12,19 +12,22 @@
           <div>
             {{apartment.name}}
           </div>
-          <div>
+          <div *ngIf="apartment.lock.lockService !== 'RemoteLock'; else describeRemoteLock">
 
-          <div class="icon-list" *ngIf="apartment | beenhere  | withLoading | async as obs">
-            <ng-template [ngIf]="!obs.loading">
-              <mat-icon [matTooltip]="obs.value?.serviceNotification ? 'Sprzątaczka była w apartamencie' : 'Sprzątaczka nie była w apartamencie'" [class.green]="obs.value?.serviceNotification" (click)="openRecordTableDialog($event, apartment)">beenhere</mat-icon>
-              <mat-icon [matTooltip]="obs.value?.guestNotification ? 'Gość się zakwaterował' : 'Gość się nie zakwaterował'" [class.black]="obs.value?.guestNotification" (click)="openRecordTableDialog($event, apartment)">local_hotel</mat-icon>
-            </ng-template>
-            <ng-template [ngIf]="obs.loading">
-              <div>Pobieranie...</div>
-            </ng-template>
-          </div> 
+            <div class="icon-list" *ngIf="apartment | beenhere  | withLoading | async as obs" (click)="openRecordTableDialog($event, apartment)">
+              <ng-template [ngIf]="!obs.loading">
+                <mat-icon [matTooltip]="obs.value?.serviceNotification ? 'Sprzątaczka była w apartamencie' : 'Sprzątaczka nie była w apartamencie'" [class.green]="obs.value?.serviceNotification">beenhere</mat-icon>
+                <mat-icon [matTooltip]="obs.value?.guestNotification ? 'Gość się zakwaterował' : 'Gość się nie zakwaterował'" [class.black]="obs.value?.guestNotification">local_hotel</mat-icon>
+              </ng-template>
+              <ng-template [ngIf]="obs.loading">
+                <div>Pobieranie...</div>
+              </ng-template>
+            </div>
 
           </div>
+          <ng-template #describeRemoteLock>
+            RemoteLock
+          </ng-template>
         </mat-panel-description>
       </mat-expansion-panel-header>
 

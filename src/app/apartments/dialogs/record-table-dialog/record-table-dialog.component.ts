@@ -4,6 +4,7 @@ import {Apartment} from '../../models/apartment';
 import {RecordsService} from 'src/app/records/records.service';
 import {RecordsList} from 'src/app/records/models/recordsList';
 import {MatTableDataSource} from '@angular/material/table';
+import {RecordType} from 'src/app/records/models/recordType';
 
 export interface DialogData {
   apartment: Apartment;
@@ -38,6 +39,10 @@ export class RecordTableDialogComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getRecordType(type: number) {
+    return RecordType[type] || type;
   }
 
 }
