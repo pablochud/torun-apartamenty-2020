@@ -16,7 +16,7 @@
 
             <div class="icon-list" *ngIf="apartment | beenhere  | withLoading | async as obs" (click)="openRecordTableDialog($event, apartment)">
               <ng-template [ngIf]="!obs.loading">
-                <mat-icon [matTooltip]="obs.value?.serviceNotification ? 'Sprzątaczka była w apartamencie' : 'Sprzątaczka nie była w apartamencie'" [class.green]="obs.value?.serviceNotification">beenhere</mat-icon>
+                <mat-icon [matTooltip]="obs.value?.serviceNotification ? 'Sprzątaczka była w apartamencie' : 'Sprzątaczka nie była w apartamencie'" [ngClass]="{'green': obs.value?.serviceNotification, 'red': !obs.value?.serviceNotification && obs.value?.guestNotification}">beenhere</mat-icon>
                 <mat-icon [matTooltip]="obs.value?.guestNotification ? 'Gość się zakwaterował' : 'Gość się nie zakwaterował'" [class.black]="obs.value?.guestNotification">local_hotel</mat-icon>
               </ng-template>
               <ng-template [ngIf]="obs.loading">
