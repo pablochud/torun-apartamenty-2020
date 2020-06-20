@@ -36,10 +36,10 @@ export class ApartmentsService {
     return this.httpClient.post(ServerUrlsService.createApartmentUrl(), newApartment, { headers });
   }
 
-  getNotification(): Observable<Notification[]> {
+  getNotification(id: number): Observable<Notification[]> {
     const headers = new HttpHeaders({Authorization: LoginService.getAuthHeader()});
     headers.append('Content-Type', 'application/json');
-    return this.httpClient.get<Notification[]>(ServerUrlsService.getNotificationUrl(), {headers});
+    return this.httpClient.get<Notification[]>(ServerUrlsService.getNotificationUrl(id), {headers});
   }
 
 }

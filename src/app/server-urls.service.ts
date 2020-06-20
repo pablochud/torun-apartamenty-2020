@@ -10,8 +10,8 @@ export class ServerUrlsService {
     return ServerUrlsService.prefix + 'apartments';
   }
 
-  public static getNotificationUrl(): string {
-    return ServerUrlsService.prefix + 'apartments/notification';
+  public static getNotificationUrl(id: number): string {
+    return ServerUrlsService.prefix + 'apartments/notification/' + id;
   }
 
   static deleteApartmentUrl(id: number) {

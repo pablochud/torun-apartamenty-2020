@@ -12,18 +12,19 @@ export class BeenHere implements PipeTransform {
   constructor(
       private apartmentsService: ApartmentsService
   ) {
-    this.data$ =  this.apartmentsService.getNotification().pipe(shareReplay(1));
+    // this.data$ =  this.apartmentsService.getNotification().pipe(shareReplay(1));
   }
 
   transform(apartment: Apartment): Observable<any> {
-        return this.data$.pipe(
-          map((resp: Notification[]) => {
-            return resp.find(notification => {
-              return notification.idoSellKeyName === apartment.idoSellKeyName &&
-                +notification.lockId === +apartment.lock.id;
-            });
-          })
-        );
+    return this.apartmentsService.getNotification(apartment.id);
+        // return this.data$.pipe(
+        //   map((resp: Notification[]) => {
+        //     return resp.find(notification => {
+        //       return notification.idoSellKeyName === apartment.idoSellKeyName &&
+        //         +notification.lockId === +apartment.lock.id;
+        //     });
+        //   })
+        // );
 
   }
 }
