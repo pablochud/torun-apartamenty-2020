@@ -2,7 +2,7 @@
   <div *ngIf="showSpinner" class="centered-spinner">
     <mat-spinner></mat-spinner>
   </div>
-  <mat-accordion class="example-headers-align" *ngFor="let apartment of apartments; let i = index">
+  <mat-accordion class="example-headers-align" *ngFor="let apartment of apartments; let i = index" [ngClass]="isExpansionDisabled()">
     <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -115,7 +115,7 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <mat-accordion class="example-headers-align" *ngIf="newApartment !== undefined && !showSpinner">
+  <mat-accordion class="example-headers-align" *ngIf="newApartment !== undefined && !showSpinner && !isSprzataczka()">
     <mat-expansion-panel hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>

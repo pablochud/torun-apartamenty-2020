@@ -14,6 +14,9 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {RecordTableDialogComponent} from './dialogs/record-table-dialog/record-table-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 
+import {ROLE} from '../users/models/Role';
+import {LoginService} from '../login/login.service';
+
 @Component({
   selector: 'app-apartments',
   templateUrl: './apartments.component.html',
@@ -185,12 +188,25 @@ export class ApartmentsComponent implements OnInit {
 
   public openRecordTableDialog(event: Event, apartment: Apartment): void {
     event.stopPropagation();
-    this.dialog.open(RecordTableDialogComponent, {
-      data: {
-        apartment
-      },
-      minWidth: '40vw'
-    });
+    if (!this.isSprzataczka()) {
+      this.dialog.open(RecordTableDialogComponent, {
+        data: {
+          apartment
+        },
+        minWidth: '40vw'
+      });
+    }
+  }
+
+  isExpansionDisabled(): string {
+    if (this.isSprzataczka()) {
+      return 'disabled-pointer';
+    }
+    return '';
+  }
+
+  isSprzataczka(): boolean {
+    return LoginService.getRole() === ROLE.SPRZATACZKA;
   }
 
 }

@@ -35,7 +35,7 @@
       <app-reservations></app-reservations>
     </div>
   </mat-tab>
-  <mat-tab *ngIf="isDeveloper() || isOwner()" [label]="tabsLabels.APARTMENTS">
+  <mat-tab *ngIf="isDeveloper() || isOwner() || isSprzataczka()" [label]="tabsLabels.APARTMENTS">
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">local_hotel</mat-icon>
       {{tabsLabels.APARTMENTS}}
